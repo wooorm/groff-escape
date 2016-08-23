@@ -30,7 +30,7 @@
     "xo": "^0.16.0"
   },
   "scripts": {
-    "build-generate": "sh build.sh",
+    "build-generate": "bash build.sh",
     "build-md": "remark . --quiet --frail",
     "build": "npm run build-generate && npm run build-md",
     "lint": "xo",
