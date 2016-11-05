@@ -58,7 +58,7 @@ http
           });
 
           /* Write. */
-          fs.writeFileSync('index.json', JSON.stringify(map, 0, 2) + '\n', bail);
+          fs.writeFile('index.json', JSON.stringify(map, 0, 2) + '\n', bail);
         }));
       });
   })
