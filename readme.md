@@ -1,7 +1,7 @@
 # groff-escape [![Build Status][build-badge]][build-status]
 
 Map of non-ASCII characters to Groff commands: `'≠'` > `'!='`
-(which you’ll need to wrap in like so `\[!=]` to use in Groff).
+(which you’ll need to wrap like so `\[!=]` to use in Groff).
 
 ## Installation
 
