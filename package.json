@@ -43,10 +43,7 @@
     "space": true,
     "rules": {
       "quote-props": "off"
-    },
-    "ignores": [
-      "groff-escape.js"
-    ]
+    }
   },
   "remarkConfig": {
     "output": true,
