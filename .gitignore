@@ -3,5 +3,3 @@
 node_modules/
 groff-escape.js
 groff-escape.min.js
-data.cpp
-data.txt

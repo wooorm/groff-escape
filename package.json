@@ -23,14 +23,16 @@
     "index.json"
   ],
   "devDependencies": {
-    "d3-dsv": "^1.0.1",
+    "bail": "^1.0.1",
+    "concat-stream": "^1.5.2",
     "remark-cli": "^2.0.0",
     "remark-preset-wooorm": "^1.0.0",
     "tape": "^4.4.0",
+    "tar": "^2.2.1",
     "xo": "^0.17.0"
   },
   "scripts": {
-    "build-generate": "bash build.sh",
+    "build-generate": "node build",
     "build-md": "remark . --quiet --frail",
     "build": "npm run build-generate && npm run build-md",
     "lint": "xo",
