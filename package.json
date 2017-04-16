@@ -25,15 +25,15 @@
   "devDependencies": {
     "bail": "^1.0.1",
     "concat-stream": "^1.5.2",
-    "remark-cli": "^2.0.0",
-    "remark-preset-wooorm": "^1.0.0",
+    "remark-cli": "^3.0.0",
+    "remark-preset-wooorm": "^2.0.0",
     "tape": "^4.4.0",
     "tar": "^2.2.1",
-    "xo": "^0.17.0"
+    "xo": "^0.18.1"
   },
   "scripts": {
     "build-generate": "node build",
-    "build-md": "remark . --quiet --frail",
+    "build-md": "remark . -qfo",
     "build": "npm run build-generate && npm run build-md",
     "lint": "xo",
     "test-api": "node test",
@@ -41,12 +41,14 @@
   },
   "xo": {
     "space": true,
+    "esnext": false,
     "rules": {
       "quote-props": "off"
     }
   },
   "remarkConfig": {
-    "output": true,
-    "presets": "wooorm"
+    "plugins": [
+      "preset-wooorm"
+    ]
   }
 }
