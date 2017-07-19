@@ -8,20 +8,17 @@
     "groff",
     "command"
   ],
-  "repository": "https://github.com/wooorm/groff-escape",
+  "repository": "wooorm/groff-escape",
   "bugs": "https://github.com/wooorm/groff-escape/issues",
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
   ],
-  "engines": {
-    "node": ">=0.11.0"
-  },
-  "dependencies": {},
   "main": "index.json",
   "files": [
     "index.json"
   ],
+  "dependencies": {},
   "devDependencies": {
     "bail": "^1.0.1",
     "concat-stream": "^1.5.2",
@@ -41,10 +38,7 @@
   },
   "xo": {
     "space": true,
-    "esnext": false,
-    "rules": {
-      "quote-props": "off"
-    }
+    "esnext": false
   },
   "remarkConfig": {
     "plugins": [
