@@ -1,65 +1,62 @@
 'use strict';
 
-/* eslint-disable max-nested-callbacks */
-
-/* Dependencies. */
 var fs = require('fs');
 var path = require('path');
 var http = require('http');
-var zlib = require('zlib');
 var tar = require('tar');
 var concat = require('concat-stream');
 var bail = require('bail');
 
-/* Core. */
-http
-  .request('http://ftp.gnu.org/gnu/groff/groff-1.22.3.tar.gz', function (res) {
-    res
-      .pipe(new zlib.Unzip())
-      .pipe(new tar.Parse())
-      .on('entry', function (entry) {
-        if (path.basename(entry.path) !== 'uniglyph.cpp') {
-          return;
-        }
+http.request('http://ftp.gnu.org/gnu/groff/groff-1.22.3.tar.gz', onrequest).end();
 
-        entry.pipe(concat(function (body) {
-          var map = {};
-          var data;
+function onrequest(res) {
+  res.pipe(tar.t()).on('entry', onentry);
+}
 
-          data = String(body)
-            .split('\n')
-            .filter(function (line) {
-              var val = '  { "';
-              return line.slice(0, val.length) === val;
-            })
-            .map(function (line) {
-              return line.trim().replace('{', '[').replace('}', ']');
-            })
-            .join('\n');
+function onentry(entry) {
+  if (path.basename(entry.path) === 'uniglyph.cpp') {
+    entry.pipe(concat(onconcat));
+  }
+}
 
-          data = JSON.parse('[' + data.slice(0, -1) + ']');
+function onconcat(body) {
+  var map = {};
+  var data = String(body)
+    .split('\n')
+    .filter(filter)
+    .map(clean)
+    .join('\n');
 
-          data.forEach(function (row) {
-            var chars = row[0].split('_').map(function (point) {
-              return String.fromCharCode(parseInt(point, 16));
-            });
+  JSON.parse('[' + data.slice(0, -1) + ']').forEach(parse);
 
-            if (!chars.some(function (char) {
-              return char.charCodeAt(0) >= 128;
-            })) {
-              return;
-            }
+  fs.writeFile('index.json', JSON.stringify(map, 0, 2) + '\n', bail);
 
-            chars = chars.join('');
+  function parse(row) {
+    var chars = row[0].split('_').map(toChar);
 
-            if (chars !== row[1]) {
-              map[chars] = row[1];
-            }
-          });
+    if (chars.some(nonAscii)) {
+      chars = chars.join('');
 
-          /* Write. */
-          fs.writeFile('index.json', JSON.stringify(map, 0, 2) + '\n', bail);
-        }));
-      });
-  })
-  .end();
+      if (chars !== row[1]) {
+        map[chars] = row[1];
+      }
+    }
+  }
+
+  function nonAscii(char) {
+    return char.charCodeAt(0) >= 128;
+  }
+
+  function toChar(point) {
+    return String.fromCharCode(parseInt(point, 16));
+  }
+
+  function filter(line) {
+    var val = '  { "';
+    return line.slice(0, val.length) === val;
+  }
+
+  function clean(line) {
+    return line.trim().replace('{', '[').replace('}', ']');
+  }
+}
