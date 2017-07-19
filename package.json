@@ -26,9 +26,9 @@
     "bail": "^1.0.1",
     "concat-stream": "^1.5.2",
     "remark-cli": "^3.0.0",
-    "remark-preset-wooorm": "^2.0.0",
+    "remark-preset-wooorm": "^3.0.0",
     "tape": "^4.4.0",
-    "tar": "^2.2.1",
+    "tar": "^3.1.5",
     "xo": "^0.18.1"
   },
   "scripts": {
