@@ -13,10 +13,10 @@ npm install groff-escape
 
 ## Usage
 
-Dependencies:
-
 ```javascript
 var escape = require('groff-escape');
+
+console.log(escape);
 ```
 
 Yields:
