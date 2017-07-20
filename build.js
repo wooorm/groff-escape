@@ -1,5 +1,11 @@
 'use strict';
 
+if (parseInt(process.version.slice(1), 10) < 6) {
+  console.warn('Cannot build on versions lower than Node@6');
+  /* eslint-disable unicorn/no-process-exit */
+  process.exit();
+}
+
 var fs = require('fs');
 var path = require('path');
 var http = require('http');
