@@ -2,11 +2,3 @@ language: node_js
 node_js:
 - '4.0'
 - '8.0'
-deploy:
-  provider: npm
-  email: tituswormer@gmail.com
-  api_key:
-    secure: VNY27+QjvRFWPgO4XF/3EYdEbqfxrlhJKYX1uNxvW1wD2q4gPkNQQ52eXlnFBhA8GCvZ7e4s3Hv8IbMwnThU1UBemBA0P+N+q7kMhvObIJ1jB1g1w8q3Ax30rP1nD4vZyPyzw03TJIjz0BOpWuESw7++17RXYFatAUJSz3z5gO/DPIQLiMoC1/JjFMcovgLsWEk4XXfKNFLj26k+cuwgK03xkSOVXtVr1bAkajVhdkn2+PKhFL3ClE/fjKQXe1a5CTaUwrtO1jjYzpHSCfnhWKLGc9u8/y/q9xZmpioxtjTFE2aRSFtIHaHL9aYrlnA6+hAS/JCb9H2LtmNl2Uiw4MRQoCiNM4ezHIcUGEpGbUT14xHCtvGv/8h48Ua/3JZJJDLUuFhwX9SnGlwgULCZO28MAlkj+p6k8bxXq+8RwND0UYMKWATUzqpCtR1hxgImBmjjewAgJwQ6TY3xteVJx00Vj1vNgzX8mDGqFX0avPjAJEH3BDuClJWyRhd3T+Oblmi3vBqBhHD0kRXSASwQVXgoPT0VK0f2lub8sticmsjG+Vuhndwl5XFVve6RqBRIdsdvC5djPgemCXjWKItGYh+G+CiFC8EPyyIXYNv4SIOlyiz9SSicOJqtPM1UV//H+Ph5LvaWgu/Ydx16/vt0Tqpq/u1eGVL8nQxd7wiuzkM=
-  on:
-    tags: true
-    node: '8.0'
