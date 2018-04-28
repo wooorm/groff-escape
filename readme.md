@@ -14,9 +14,9 @@ npm install groff-escape
 ## Usage
 
 ```javascript
-var escape = require('groff-escape');
+var escape = require('groff-escape')
 
-console.log(escape);
+console.log(escape)
 ```
 
 Yields:
