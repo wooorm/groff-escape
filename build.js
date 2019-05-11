@@ -8,13 +8,13 @@ if (parseInt(process.version.slice(1), 10) < 6) {
 
 var fs = require('fs')
 var path = require('path')
-var http = require('http')
+var https = require('https')
 var tar = require('tar')
 var concat = require('concat-stream')
 var bail = require('bail')
 
-http
-  .request('http://ftp.gnu.org/gnu/groff/groff-1.22.3.tar.gz', onrequest)
+https
+  .request('https://ftp.gnu.org/gnu/groff/groff-1.22.3.tar.gz', onrequest)
   .end()
 
 function onrequest(res) {
