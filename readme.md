@@ -45,7 +45,7 @@ Yields:
 
 [build-status]: https://travis-ci.org/wooorm/groff-escape
 
-[license]: LICENSE
+[license]: license
 
 [author]: http://wooorm.com
 
