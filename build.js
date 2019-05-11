@@ -4,6 +4,7 @@ if (parseInt(process.version.slice(1), 10) < 6) {
   console.warn('Cannot build on versions lower than Node@6')
   /* eslint-disable unicorn/no-process-exit */
   process.exit()
+  /* eslint-enable unicorn/no-process-exit */
 }
 
 var fs = require('fs')
