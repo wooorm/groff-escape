@@ -1,4 +1,8 @@
-# groff-escape [![Build Status][build-badge]][build-status]
+# groff-escape
+
+[![Build][build-badge]][build]
+[![Downloads][downloads-badge]][downloads]
+[![Size][size-badge]][size]
 
 Map of non-ASCII characters to Groff commands: `'≠'` > `'!='`
 (which you’ll need to wrap like so `\[!=]` to use in Groff).
@@ -43,7 +47,15 @@ Yields:
 
 [build-badge]: https://img.shields.io/travis/wooorm/groff-escape.svg
 
-[build-status]: https://travis-ci.org/wooorm/groff-escape
+[build]: https://travis-ci.org/wooorm/groff-escape
+
+[downloads-badge]: https://img.shields.io/npm/dm/groff-escape.svg
+
+[downloads]: https://www.npmjs.com/package/groff-escape
+
+[size-badge]: https://img.shields.io/bundlephobia/minzip/groff-escape.svg
+
+[size]: https://bundlephobia.com/result?p=groff-escape
 
 [license]: license
 
