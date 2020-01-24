@@ -15,7 +15,7 @@ var concat = require('concat-stream')
 var bail = require('bail')
 
 https
-  .request('https://ftp.gnu.org/gnu/groff/groff-1.22.3.tar.gz', onrequest)
+  .request('https://ftp.gnu.org/gnu/groff/groff-1.22.4.tar.gz', onrequest)
   .end()
 
 function onrequest(res) {
