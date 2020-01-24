@@ -4,20 +4,20 @@
 [![Downloads][downloads-badge]][downloads]
 [![Size][size-badge]][size]
 
-Map of non-ASCII characters to Groff commands: `'≠'` > `'!='`
-(which you’ll need to wrap like so `\[!=]` to use in Groff).
+Map of non-ASCII characters to Groff commands: `'≠'` > `'!='` (which you’ll
+need to wrap like so `\[!=]` to use in Groff).
 
-## Installation
+## Install
 
 [npm][]:
 
-```bash
+```sh
 npm install groff-escape
 ```
 
-## Usage
+## Use
 
-```javascript
+```js
 var escape = require('groff-escape')
 
 console.log(escape)
@@ -31,7 +31,7 @@ Yields:
   'Á': '\'A',
   'Â': '^A',
   'Ã': '~A',
-  // ...
+  // …
   '♥': 'HE',
   '♦': 'DI',
   '✓': 'OK',
