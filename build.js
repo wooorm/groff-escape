@@ -14,12 +14,13 @@ var tar = require('tar')
 var concat = require('concat-stream')
 var bail = require('bail')
 
+// To update, see <https://ftp.gnu.org/gnu/groff/> if there are newer versions.
 https
   .request('https://ftp.gnu.org/gnu/groff/groff-1.22.4.tar.gz', onrequest)
   .end()
 
-function onrequest(res) {
-  res.pipe(tar.t()).on('entry', onentry)
+function onrequest(response) {
+  response.pipe(tar.t()).on('entry', onentry)
 }
 
 function onentry(entry) {
@@ -30,11 +31,7 @@ function onentry(entry) {
 
 function onconcat(body) {
   var map = {}
-  var data = String(body)
-    .split('\n')
-    .filter(filter)
-    .map(clean)
-    .join('\n')
+  var data = String(body).split('\n').filter(filter).map(clean).join('\n')
 
   JSON.parse('[' + data.slice(0, -1) + ']').forEach(parse)
 
@@ -61,14 +58,11 @@ function onconcat(body) {
   }
 
   function filter(line) {
-    var val = '  { "'
-    return line.slice(0, val.length) === val
+    var value = '  { "'
+    return line.slice(0, value.length) === value
   }
 
   function clean(line) {
-    return line
-      .trim()
-      .replace('{', '[')
-      .replace('}', ']')
+    return line.trim().replace('{', '[').replace('}', ']')
   }
 }
