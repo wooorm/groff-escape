@@ -10,6 +10,9 @@ need to wrap like so `\[!=]` to use in Groff).
 
 ## Install
 
+This package is ESM only: Node 12+ is needed to use it and it must be `import`ed
+instead of `require`d.
+
 [npm][]:
 
 ```sh
@@ -19,9 +22,9 @@ npm install groff-escape
 ## Use
 
 ```js
-var escape = require('groff-escape')
+import {groffEscape} from 'groff-escape'
 
-console.log(escape)
+console.log(groffEscape)
 ```
 
 Yields:
@@ -39,6 +42,15 @@ Yields:
   '⟨': 'la',
   '⟩': 'ra' }
 ```
+
+## API
+
+This package exports the following identifiers: `groffEscape`.
+There is no default export.
+
+### `groffEscape`
+
+`Object.<string, string>` — Map of non-ASCII characters to Groff commands
 
 ## License
 

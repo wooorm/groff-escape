@@ -1,12 +1,10 @@
-'use strict'
+import test from 'tape'
+import {groffEscape} from './index.js'
 
-var test = require('tape')
-var escape = require('.')
-
-test('groff-escape', function (t) {
-  t.equal(escape['π'], '*p', 'π')
-  t.equal(escape['✓'], 'OK', '✓')
-  t.equal(escape['∧'], 'AN', '∧')
+test('groffEscape', function (t) {
+  t.equal(groffEscape['π'], '*p', 'π')
+  t.equal(groffEscape['✓'], 'OK', '✓')
+  t.equal(groffEscape['∧'], 'AN', '∧')
 
   t.end()
 })

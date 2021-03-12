@@ -1,18 +1,9 @@
-'use strict'
-
-if (parseInt(process.version.slice(1), 10) < 6) {
-  console.warn('Cannot build on versions lower than Node@6')
-  /* eslint-disable unicorn/no-process-exit */
-  process.exit()
-  /* eslint-enable unicorn/no-process-exit */
-}
-
-var fs = require('fs')
-var path = require('path')
-var https = require('https')
-var tar = require('tar')
-var concat = require('concat-stream')
-var bail = require('bail')
+import fs from 'fs'
+import path from 'path'
+import https from 'https'
+import tar from 'tar'
+import concat from 'concat-stream'
+import bail from 'bail'
 
 // To update, see <https://ftp.gnu.org/gnu/groff/> if there are newer versions.
 https
@@ -46,7 +37,7 @@ function onconcat(body) {
     row = list[index]
     chars = row[0]
       .split('_')
-      .map((point) => String.fromCharCode(parseInt(point, 16)))
+      .map((point) => String.fromCharCode(Number.parseInt(point, 16)))
 
     if (chars.some((char) => char.charCodeAt(0) >= 128)) {
       chars = chars.join('')
@@ -57,5 +48,9 @@ function onconcat(body) {
     }
   }
 
-  fs.writeFile('index.json', JSON.stringify(map, 0, 2) + '\n', bail)
+  fs.writeFile(
+    'index.js',
+    'export var groffEscape = ' + JSON.stringify(map, null, 2) + '\n',
+    bail
+  )
 }
