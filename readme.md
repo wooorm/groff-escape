@@ -1,6 +1,7 @@
 # groff-escape
 
 [![Build][build-badge]][build]
+[![Coverage][coverage-badge]][coverage]
 [![Downloads][downloads-badge]][downloads]
 [![Size][size-badge]][size]
 
@@ -45,9 +46,13 @@ Yields:
 
 <!-- Definitions -->
 
-[build-badge]: https://img.shields.io/travis/wooorm/groff-escape.svg
+[build-badge]: https://github.com/wooorm/groff-escape/workflows/main/badge.svg
 
-[build]: https://travis-ci.org/wooorm/groff-escape
+[build]: https://github.com/wooorm/groff-escape/actions
+
+[coverage-badge]: https://img.shields.io/codecov/c/github/wooorm/groff-escape.svg
+
+[coverage]: https://codecov.io/github/wooorm/groff-escape
 
 [downloads-badge]: https://img.shields.io/npm/dm/groff-escape.svg
 
