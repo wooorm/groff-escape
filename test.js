@@ -4,15 +4,9 @@ var test = require('tape')
 var escape = require('.')
 
 test('groff-escape', function (t) {
-  var fixtures = [
-    ['π', '*p'],
-    ['✓', 'OK'],
-    ['∧', 'AN']
-  ]
-
-  fixtures.forEach(function (fixture) {
-    t.equal(escape[fixture[0]], fixture[1], fixture[0])
-  })
+  t.equal(escape['π'], '*p', 'π')
+  t.equal(escape['✓'], 'OK', '✓')
+  t.equal(escape['∧'], 'AN', '∧')
 
   t.end()
 })

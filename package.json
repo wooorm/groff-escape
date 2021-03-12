@@ -22,7 +22,6 @@
   "files": [
     "index.json"
   ],
-  "dependencies": {},
   "devDependencies": {
     "bail": "^1.0.0",
     "concat-stream": "^2.0.0",
@@ -31,7 +30,7 @@
     "remark-preset-wooorm": "^8.0.0",
     "tape": "^5.0.0",
     "tar": "^6.0.0",
-    "xo": "^0.34.0"
+    "xo": "^0.38.0"
   },
   "scripts": {
     "generate": "node build",

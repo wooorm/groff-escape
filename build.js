@@ -31,16 +31,24 @@ function onentry(entry) {
 
 function onconcat(body) {
   var map = {}
-  var data = String(body).split('\n').filter(filter).map(clean).join('\n')
+  var prefix = '  { "'
+  var data = String(body)
+    .split('\n')
+    .filter((line) => line.slice(0, prefix.length) === prefix)
+    .map((line) => line.trim().replace('{', '[').replace('}', ']'))
+    .join('\n')
+  var list = JSON.parse('[' + data.slice(0, -1) + ']')
+  var index = -1
+  var row
+  var chars
 
-  JSON.parse('[' + data.slice(0, -1) + ']').forEach(parse)
+  while (++index < list.length) {
+    row = list[index]
+    chars = row[0]
+      .split('_')
+      .map((point) => String.fromCharCode(parseInt(point, 16)))
 
-  fs.writeFile('index.json', JSON.stringify(map, 0, 2) + '\n', bail)
-
-  function parse(row) {
-    var chars = row[0].split('_').map(toChar)
-
-    if (chars.some(nonAscii)) {
+    if (chars.some((char) => char.charCodeAt(0) >= 128)) {
       chars = chars.join('')
 
       if (chars !== row[1]) {
@@ -49,20 +57,5 @@ function onconcat(body) {
     }
   }
 
-  function nonAscii(char) {
-    return char.charCodeAt(0) >= 128
-  }
-
-  function toChar(point) {
-    return String.fromCharCode(parseInt(point, 16))
-  }
-
-  function filter(line) {
-    var value = '  { "'
-    return line.slice(0, value.length) === value
-  }
-
-  function clean(line) {
-    return line.trim().replace('{', '[').replace('}', ']')
-  }
+  fs.writeFile('index.json', JSON.stringify(map, 0, 2) + '\n', bail)
 }
