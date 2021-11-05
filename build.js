@@ -1,9 +1,9 @@
-import fs from 'fs'
-import path from 'path'
-import https from 'https'
+import fs from 'node:fs'
+import path from 'node:path'
+import https from 'node:https'
 import tar from 'tar'
 import concat from 'concat-stream'
-import bail from 'bail'
+import {bail} from 'bail'
 
 // To update, see <https://ftp.gnu.org/gnu/groff/> if there are newer versions.
 https
