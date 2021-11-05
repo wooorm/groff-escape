@@ -1,3 +1,8 @@
+/**
+ * Map of non-ASCII characters to Groff commands.
+ *
+ * @type {Record<string, string>}
+ */
 export const groffEscape = {
   '≠': '!=',
   À: '`A',
