@@ -1,4 +1,4 @@
-export var groffEscape = {
+export const groffEscape = {
   '≠': '!=',
   À: '`A',
   Á: "'A",

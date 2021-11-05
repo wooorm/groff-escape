@@ -2,55 +2,51 @@ import fs from 'node:fs'
 import path from 'node:path'
 import https from 'node:https'
 import tar from 'tar'
-import concat from 'concat-stream'
+import concatStream from 'concat-stream'
 import {bail} from 'bail'
 
 // To update, see <https://ftp.gnu.org/gnu/groff/> if there are newer versions.
 https
-  .request('https://ftp.gnu.org/gnu/groff/groff-1.22.4.tar.gz', onrequest)
-  .end()
+  .request('https://ftp.gnu.org/gnu/groff/groff-1.22.4.tar.gz', (response) => {
+    response.pipe(tar.t()).on('entry', (entry) => {
+      if (path.basename(entry.path) === 'uniglyph.cpp') {
+        entry.pipe(
+          concatStream((body) => {
+            const map = {}
+            const prefix = '  { "'
+            const data = String(body)
+              .split('\n')
+              .filter((line) => line.slice(0, prefix.length) === prefix)
+              .map((line) => line.trim().replace('{', '[').replace('}', ']'))
+              .join('\n')
+            const list = JSON.parse('[' + data.slice(0, -1) + ']')
+            let index = -1
 
-function onrequest(response) {
-  response.pipe(tar.t()).on('entry', onentry)
-}
+            while (++index < list.length) {
+              const row = list[index]
+              const characters = row[0]
+                .split('_')
+                .map((point) => String.fromCharCode(Number.parseInt(point, 16)))
 
-function onentry(entry) {
-  if (path.basename(entry.path) === 'uniglyph.cpp') {
-    entry.pipe(concat(onconcat))
-  }
-}
+              if (characters.some((char) => char.charCodeAt(0) >= 128)) {
+                const value = characters.join('')
 
-function onconcat(body) {
-  var map = {}
-  var prefix = '  { "'
-  var data = String(body)
-    .split('\n')
-    .filter((line) => line.slice(0, prefix.length) === prefix)
-    .map((line) => line.trim().replace('{', '[').replace('}', ']'))
-    .join('\n')
-  var list = JSON.parse('[' + data.slice(0, -1) + ']')
-  var index = -1
-  var row
-  var chars
+                if (value !== row[1]) {
+                  map[value] = row[1]
+                }
+              }
+            }
 
-  while (++index < list.length) {
-    row = list[index]
-    chars = row[0]
-      .split('_')
-      .map((point) => String.fromCharCode(Number.parseInt(point, 16)))
-
-    if (chars.some((char) => char.charCodeAt(0) >= 128)) {
-      chars = chars.join('')
-
-      if (chars !== row[1]) {
-        map[chars] = row[1]
+            fs.writeFile(
+              'index.js',
+              'export const groffEscape = ' +
+                JSON.stringify(map, null, 2) +
+                '\n',
+              bail
+            )
+          })
+        )
       }
-    }
-  }
-
-  fs.writeFile(
-    'index.js',
-    'export var groffEscape = ' + JSON.stringify(map, null, 2) + '\n',
-    bail
-  )
-}
+    })
+  })
+  .end()
