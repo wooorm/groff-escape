@@ -32,9 +32,16 @@ https
               const row = list[index]
               const characters = row[0]
                 .split('_')
-                .map((point) => String.fromCharCode(Number.parseInt(point, 16)))
+                .map((point) =>
+                  String.fromCodePoint(Number.parseInt(point, 16))
+                )
 
-              if (characters.some((char) => char.charCodeAt(0) >= 128)) {
+              if (
+                characters.some((char) => {
+                  const cp = char.codePointAt(0)
+                  return cp !== undefined && cp >= 128
+                })
+              ) {
                 const value = characters.join('')
 
                 if (value !== row[1]) {
